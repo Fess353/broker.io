@@ -836,6 +836,10 @@
 	top: 40px;
 }
 
+.main-page__result-link {
+	color:#ffffff;
+}
+
 .main-page__result-cat {
 	z-index: 25;
 }
@@ -846,7 +850,7 @@
 	min-height: 100px;
 	@media (min-width: 768px) {
 		width: 384px;
-		height: 100px;
+		height: 130px;
 	}
 }
 
@@ -1052,7 +1056,7 @@
 }
 
 @keyframes rotatePhone {
-	    0% {
+	0% {
 		transform: rotate(0deg);
 	}
 	100% {

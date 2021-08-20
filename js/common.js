@@ -77,7 +77,6 @@ $(function () {
 	updateDeviceProps('body');
 });
 /* eslint-env es6 */
-// let mainPage = document.querySelector('.main-page');
 let centerCat = document.querySelector('.main-page__center-cat');
 let centerCatCash = document.querySelector('.main-page__center-cat-cash');
 let leftCat = document.querySelector('.main-page__left-cat');
@@ -102,7 +101,6 @@ let $error = $('.final-block__email-error');
 let popup = document.querySelector('.main-page__popup-final-wrapper');
 let popupCloseBtn = document.querySelector('.popup-final__close-btn');
 let finalBlockArrow = document.querySelector('.final-block__arrow');
-
 let checkboxLabel = document.querySelector('.final-block__checkbox-label');
 let catCounter = 1;
 let pageCounter = 0;
@@ -110,7 +108,12 @@ let resultArray = [];
 
 window.onload = function () {
 	if ($(window).width() < 768) {
-		mainPageButton.scrollIntoView({ behavior: 'smooth', block: 'end' });
+		$('html, body').animate({
+			scrollTop: $(mainPageButton).offset().top
+		}, {
+			duration: 400,
+			easing: 'linear'
+		});
 	}
 };
 
@@ -169,11 +172,11 @@ let questionsArray = [
 ];
 
 let catsDescriptionArray = [
-	'Твой портфель идеально сбалансирован, а будущее расписано на пять лет вперед. Что ещё надо? Например, научиться эффективно действовать в непредвиденных ситуациях.«Открытие Брокер» подготовил для тебя несколько идей.',
-	'Ураган страсти, заключенный в теле инвестора. Ты найдёшь применение любым активам. У нас для тебя кое что есть — зарегистрируйся в «Открытие Брокер» и получи акцию в подарок. Подробности здесь',
-	'Действуешь вопреки общей тенденции, а иногда и вопреки здравому смыслу? Временами прокатывает? Поздравляем. Но ты же знаешь, что можешь больше. Если тебе тоже не даёт покоя звезда Уоррена Баффета, учись инвестировать с умом.',
-	'Свой капитал ты сохранишь. Несмотря на инфляцию, пандемию, падение метеорита или высадку инопланетян. Если хочешь больше зарабатывать на инвестициях — жми сюда.',
-	'В розыгрышах, конечно, приятно участвовать. Но сейчас даже школьник знает, как торговать на бирже. Поэтому мы для тебя подготовили программу бесплатного обучения. А если зарегистрируешься с этого сайта, подарим акцию'
+	'Твой портфель идеально сбалансирован, а будущее расписано на пять лет вперед. Что ещё надо? Например, научиться эффективно действовать в непредвиденных ситуациях. <a class="main-page__result-link" href="#" rel="noopener" target="_blank">«Открытие Брокер» подготовил для тебя несколько идей.</a>',
+	'Ураган страсти, заключенный в теле инвестора. Ты найдёшь применение любым активам. У нас для тебя кое что есть — зарегистрируйся в «Открытие Брокер» и получи акцию в подарок. <a class="main-page__result-link" href="#" rel="noopener" target="_blank"> Подробности здесь </a>',
+	'Действуешь вопреки общей тенденции, а иногда и вопреки здравому смыслу? Временами прокатывает? Поздравляем. Но ты же знаешь, что можешь больше. <a class="main-page__result-link" href="#" rel="noopener" target="_blank"> Если тебе тоже не даёт покоя звезда Уоррена Баффета, учись инвестировать с умом. </a>',
+	'Свой капитал ты сохранишь. Несмотря на инфляцию, пандемию, падение метеорита или высадку инопланетян. Если хочешь больше зарабатывать на инвестициях — <a class="main-page__result-link" href="#" rel="noopener" target="_blank"> жми сюда. </a>',
+	'В розыгрышах, конечно, приятно участвовать. Но сейчас даже школьник знает, как торговать на бирже. Поэтому мы для тебя подготовили программу бесплатного обучения. А если <a class="main-page__result-link" href="#" rel="noopener" target="_blank"> зарегистрируешься с этого сайта </a>, подарим акцию'
 ];
 
 let catsTypeArray = [
@@ -304,6 +307,17 @@ function loadAnswers() {
 	document.addEventListener('click', answersAddListenerToAnswer);
 }
 
+function scrollToButtonMobile() {
+	if ($(window).width() < 768) {
+		$('html, body').animate({
+			scrollTop: $(mainPageButton).offset().top
+		}, {
+			duration: 200,
+			easing: 'linear'
+		});
+	}
+}
+
 // загрузка нового вопроса, пояление кнопки ответа
 function nextQuestion(num) {
 	if (pageCounter > 0) {
@@ -324,12 +338,9 @@ function nextQuestion(num) {
 	$(mainPageButton).transit({ y: '0', opacity: '1' }, 100);
 	$(question).transit({ x: '-100px', opacity: '1' }, 400);
 	mainPageButton.addEventListener('click', loadAnswers);
-
-	if ($(window).width() < 768) {
-		setTimeout(() => {
-			mainPageButton.scrollIntoView({ behavior: 'smooth', block: 'end' });
-		}, 500);
-	}
+	setTimeout(() => {
+		scrollToButtonMobile();
+	}, 200);
 }
 
 // Прячем первую страницу, по окончании исчезновения вызываем функцию загрузки нового вопроса
@@ -369,7 +380,7 @@ function showFinalBlock() {
 function loadResultPage() {
 	let num = maxOccurences(resultArray).item;
 	resultType.textContent = catsTypeArray[num];
-	resultText.textContent = catsDescriptionArray[num];
+	resultText.innerHTML = catsDescriptionArray[num];
 
 	$('.main-page__result').css('display', 'flex');
 	$(answersContainer).transit({ opacity: '0' }, 300);
@@ -587,4 +598,14 @@ answersContainer.addEventListener('scroll', function () {
 	} else {
 		$('.answers__arrow').removeClass('arrow_still');
 	}
+});
+
+checkboxLabel.addEventListener('focus', function() {
+	checkboxLabel.addEventListener('keydown', function() {
+		if ($(checkbox).is(':checked')) {
+			$(checkbox).prop('checked', false);
+		} else {
+			$(checkbox).prop('checked', true);
+		}
+	});
 });
