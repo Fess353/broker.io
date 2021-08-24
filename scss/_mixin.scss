@@ -135,6 +135,7 @@
 
 	&:focus {
 		border: 4px solid $primary-btn-color-focus;
+		background-color: #ffffff;
 	}
 
 	&:disabled {
@@ -145,4 +146,5 @@
 	&:hover {
 		background-color: $alt-btn-color;
 	}
+
 }
