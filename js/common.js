@@ -1,81 +1,5 @@
 'use strict';
 
-$(function () {
-	var imgSvgArray = {};
-	function imgSvg() {
-		$('img.img-svg').each(function () {
-			var $svg;
-			var $img = $(this);
-			var imgID = $img.attr('id');
-			var imgClass = $img.attr('class');
-			var imgURL = $img.attr('src');
-
-			if (typeof imgSvgArray[imgURL] !== 'undefined') {
-				$svg = $(imgSvgArray[imgURL]);
-				if (typeof imgClass !== 'undefined') {
-					$svg = $svg.attr('class', imgClass + ' replaced-svg');
-				}
-				$img.replaceWith($svg);
-			} else {
-				$.ajax({
-					url: imgURL,
-					async: false,
-					dataType: 'xml',
-					success: function (data) {
-						$svg = $(data).find('svg');
-
-						if (typeof imgID !== 'undefined') {
-							$svg = $svg.attr('id', imgID);
-						}
-
-						$svg = $svg.removeAttr('xmlns:a');
-
-						if (
-							!$svg.attr('viewBox') &&
-							$svg.attr('height') &&
-							$svg.attr('width')
-						) {
-							$svg.attr(
-								'viewBox',
-								'0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width')
-							);
-						}
-
-						imgSvgArray[imgURL] = $svg[0].outerHTML;
-
-						if (typeof imgClass !== 'undefined') {
-							$svg = $svg.attr('class', imgClass + ' replaced-svg');
-						}
-
-						$img.replaceWith($svg);
-					}
-				});
-			}
-		});
-	}
-
-	$('body').on('DOMNodeInserted', function () {
-		imgSvg();
-	});
-	imgSvg();
-
-	// Настройка вспомогательных переменных
-	function updateDeviceProps(rootSelector) {
-		var vh = window.innerHeight * 0.01;
-		document.documentElement.style.setProperty('--vh', vh + 'px');
-
-		var root = document.querySelector(rootSelector);
-		var scrollWidth = window.innerWidth - root.clientWidth;
-		document.documentElement.style.setProperty(
-			'--scroll-width',
-			scrollWidth + 'px'
-		);
-	}
-	window.addEventListener('resize', function () {
-		updateDeviceProps('body');
-	});
-	updateDeviceProps('body');
-});
 /* eslint-env es6 */
 let centerCat = document.querySelector('.main-page__center-cat');
 let centerCatCash = document.querySelector('.main-page__center-cat-cash');
@@ -318,7 +242,7 @@ function scrollToButtonMobile() {
 	}
 }
 
-// загрузка нового вопроса, пояление кнопки ответа
+// загрузка нового вопроса
 function nextQuestion(num) {
 	if (pageCounter > 0) {
 		$(question).transit({ y: '0', scale: '1' }, 300);
@@ -381,7 +305,6 @@ function loadResultPage() {
 	let num = maxOccurences(resultArray).item;
 	resultType.textContent = catsTypeArray[num];
 	resultText.innerHTML = catsDescriptionArray[num];
-
 	$('.main-page__result').css('display', 'flex');
 	$(answersContainer).transit({ opacity: '0' }, 300);
 	setTimeout(() => {
@@ -397,9 +320,11 @@ function loadResultPage() {
 	resultCat.insertAdjacentHTML(
 		'beforeend',
 		`<picture class="main-page__result-cat-picture">
-    <source srcset="img/cat_result_xs${num}.png" media="(max-width: 767px)">
-    <img src="img/cat_result_sm${num}.png" alt="logo">
-    </picture>`
+		<source srcset="img/cat_result_xs${num}.webp" media="(max-width: 767px)" type="image/webp">
+		<source srcset="img/cat_result_sm${num}.webp" type="image/webp">
+    	<source srcset="img/cat_result_xs${num}.png" media="(max-width: 767px)">
+    	<img src="img/cat_result_sm${num}.png" alt="result">
+    	</picture>`
 	);
 
 	$(resultTitle)
@@ -423,6 +348,7 @@ function loadResultPage() {
 		showFinalBlock()
 	);
 }
+
 // Прячем другие ответы кроме выбранного, загрузка нового вопроса
 function loadNewQuestion(num) {
 	document.removeEventListener('click', answersAddListenerToAnswer);
@@ -548,13 +474,13 @@ finalBlockArrow.addEventListener('click', moveFinalBlock);
 finalBlockTitle.addEventListener('click', moveFinalBlock);
 
 // тестовые функции и сет имейлов для проверки финального попапа
-// исправить на ajax!!!!!
 let emailTestSet = new Set();
 emailTestSet.add('test@mail.ru');
 emailTestSet.add('test2@gmail.com');
 
 function checkEmailBase() {
 	let e = $('.final-block__email-input').val().toString().toLowerCase();
+	// тестовый блок
 	if (!emailTestSet.has(e)) {
 		emailTestSet.add(e);
 		document.querySelector('.popup-final__text').textContent =
@@ -569,6 +495,12 @@ function checkEmailBase() {
 			'img/popup_error.png';
 		document.querySelector('.popup-final__line').style.opacity = '0';
 	}
+	// конец тестового блока
+
+	// В дальнейшем исправить на конструкцию с промисами
+	// let url = '';
+	// let response = await fetch(url);
+	// let commits = await response.json();
 }
 function showPopup() {
 	checkEmailBase();
@@ -585,9 +517,6 @@ function sendForm() {
 			showPopup();
 		}, 300);
 	}
-	//  else {
-	// 	return false;
-	// }
 }
 sendButton.addEventListener('click', sendForm);
 

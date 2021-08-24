@@ -119,6 +119,20 @@
 					>
 						<picture class="main-page__center-cat-picture">
 							<source
+								type="image/webp"
+								srcset="img/cat_center_xs.webp"
+								media="(max-width: 767px)"
+							/>
+
+							<source
+								type="image/webp"
+								srcset="img/cat_center_sm.webp"
+								media="(max-width: 1399px)"
+							/>
+
+							<source type="image/webp" srcset="img/cat_center_xl.webp" />
+
+							<source
 								srcset="img/cat_center_xs.png"
 								media="(max-width: 767px)"
 							/>
@@ -144,6 +158,21 @@
 
 					<div class="main-page__left-cat">
 						<picture class="main-page__left-cat-picture">
+
+							<source
+								type="image/webp"
+								srcset="img/cat_left_xs.webp"
+								media="(max-width: 767px)"
+							/>
+
+							<source
+								type="image/webp"
+								srcset="img/cat_left_sm.webp"
+								media="(max-width: 1399px)"
+							/>
+
+							<source type="image/webp" srcset="img/cat_left_xl.webp" />
+
 							<source srcset="img/cat_left_xs.png" media="(max-width: 767px)" />
 							<source
 								srcset="img/cat_left_sm.png"
@@ -155,6 +184,21 @@
 
 					<div class="main-page__right-cat">
 						<picture class="main-page__right-cat-picture">
+
+							<source
+							type="image/webp"
+							srcset="img/cat_right_xs.webp"
+							media="(max-width: 767px)"
+						/>
+
+						<source
+							type="image/webp"
+							srcset="img/cat_right_sm.webp"
+							media="(max-width: 1399px)"
+						/>
+
+						<source type="image/webp" srcset="img/cat_right_xl.webp" />
+
 							<source
 								srcset="img/cat_right_xs.png"
 								media="(max-width: 767px)"
@@ -421,7 +465,10 @@
 			</div>
 
 			<div class="rotate-page__cat">
-				<img class="rotate-page__cat-img" src="img/cat_rotate.png" alt="cat" />
+				<picture class="rotate-page__cat-img">
+					<source type="image/webp" srcset="img/cat_rotate.webp" />
+					<img src="img/cat_rotate.png" alt="cat">
+				</picture>
 			</div>
 
 			<div class="rotate-page__phone rotate-page__phone_animated">
@@ -431,7 +478,7 @@
 
 		<script src="js/libs/jquery-3.6.0.js"></script>
 		<script src="js/libs/jquery.transit.min.js"></script>
-		<script src="js/libs/jquery.smoothscroll.js"></script>     
+		<script src="js/libs/jquery.smoothscroll.js"></script>
 		<script src="js/common.js"></script>
 	</body>
 </html>
