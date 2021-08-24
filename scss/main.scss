@@ -145,6 +145,7 @@
 	}
 }
 .question {
+	@include h2();
 	z-index: 20;
 	background-color: $bank4;
 	opacity: 0;
@@ -160,7 +161,6 @@
 	padding-right: 20px;
 	clip-path: polygon(0% 4%, 100% 0%, 98% 93%, 3% 100%);
 	text-align: center;
-	@include h2();
 	font-size: 30px;
 	@media (min-width: 768px) {
 		padding-left: 75px;
