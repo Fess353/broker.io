@@ -135,10 +135,14 @@
 
 .main-page__question {
 	position: relative;
-	top: 16vh;
+	top: 12vh;
 	right: -100px;
 	margin-left: auto;
 	margin-right: auto;
+
+	@media (min-width: 768px) {
+		top: 16vh;
+	}
 }
 .question {
 	z-index: 20;
@@ -177,7 +181,7 @@
 	height: 60px;
 	left: 50%;
 	transform: translateX(-50%);
-	top: 12vh;
+	top: 8vh;
 
 	@media (min-width: 768px) {
 		top: 14vh;
@@ -449,6 +453,7 @@
 	left: 16px;
 	top: 32px;
 	height: 32px;
+	z-index: 10;
 
 	@media (min-width: 768px) {
 		left: 24px;
