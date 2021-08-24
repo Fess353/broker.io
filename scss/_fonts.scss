@@ -1,0 +1,26 @@
+
+@include font-face("Druk Cyr", "#{$url-font}/DrukCyr-Medium/DrukCyr-Medium", "ttf") {
+	font-weight: 700;
+	font-style: normal;
+	font-display: block;
+}
+
+@include font-face("Druk Cyr", "#{$url-font}/Inter-Medium/Inter-Medium", "ttf") {
+	font-weight: 500;
+	font-style: normal;
+	font-display: block;
+}
+
+@include font-face("Druk Cyr", "#{$url-font}/Inter-ExtraBold/Inter-ExtraBald", "ttf") {
+	font-weight: 800;
+	font-style: normal;
+	font-display: block;
+}
+
+@include font-face("Druk Cyr", "#{$url-font}/Inter-Black/Inter-Black", "ttf") {
+	font-weight: 900;
+	font-style: normal;
+	font-display: block;
+}
+
+

@@ -1,0 +1,148 @@
+@mixin font-druk {
+	font-family: "Druk Cyr", sans-serif;
+}
+
+@mixin font-inter {
+	font-family: "Inter", sans-serif;
+}
+
+@mixin h1 {
+	@include font-druk();
+	font-weight: 700;
+	font-style: normal;
+	font-size: 48px;
+	line-height: 101%;
+	text-transform: uppercase;
+	box-sizing: border-box;
+
+	@media (max-height: 568px) {
+		font-size: 40px;
+	}
+	@media (min-width: 569px) {
+		font-size: 48px;
+	}
+
+	@media (min-width: 768px) {
+		font-size: 88px;
+	}
+
+	@media (min-width: 1440px) {
+		font-size: 109px;
+	}
+}
+
+@mixin h2 {
+	@include font-druk();
+	font-weight: 700;
+	font-style: normal;
+	font-size: 34px;
+	line-height: 100%;
+	box-sizing: border-box;
+
+	@media (max-height: 568px) {
+		font-size: 24px;
+	}
+}
+
+@mixin h3 {
+	@include font-inter();
+	font-weight: 800;
+	font-style: normal;
+	font-size: 18px;
+	line-height: 120%;
+	box-sizing: border-box;
+}
+
+@mixin h4 {
+	@include font-druk();
+	font-weight: 700;
+	font-style: normal;
+	font-size: 60px;
+	line-height: 100%;
+	box-sizing: border-box;
+}
+
+@mixin btn {
+	@include font-inter();
+	font-weight: 900;
+	font-style: normal;
+	font-size: 24px;
+	line-height: 110%;
+	letter-spacing: 0.5%;
+	box-sizing: border-box;
+
+	@media (min-width: 1400px) {
+		font-size: 30px;
+	}
+}
+
+@mixin p1 {
+	@include font-inter();
+	font-weight: 500;
+	font-style: normal;
+	font-size: 16px;
+	line-height: 105%;
+	box-sizing: border-box;
+
+	@media (min-width: 768px) {
+		font-size: 18px;
+	}
+}
+
+@mixin p2 {
+	@include font-inter();
+	font-weight: 500;
+	font-style: normal;
+	font-size: 12px;
+	line-height: 120%;
+	box-sizing: border-box;
+}
+
+@mixin link {
+	@include font-inter();
+	font-weight: 500;
+	font-style: normal;
+	font-size: 12px;
+	line-height: 120%;
+	box-sizing: border-box;
+}
+
+@mixin primary_button {
+	color: $primary-btn-color-text;
+	background-color: $primary-btn-color;
+	box-sizing: border-box;
+
+	&:focus {
+		border: 4px solid $primary-btn-color-focus;
+	}
+
+	&:disabled {
+		opacity: 50%;
+	}
+
+	&:active {
+		background-color: #e17a00;
+	}
+
+	&:hover {
+		background-color: $primary-btn-color-hover;
+	}
+}
+
+@mixin alt_button {
+	color: $alt-btn-color-text;
+	background-color: $alt-btn-color;
+
+	&:focus {
+		border: 4px solid $primary-btn-color-focus;
+	}
+
+	&:disabled {
+		opacity: 40%;
+		color: $bank2;
+	}
+
+	&:hover {
+		background-color: $alt-btn-color;
+	}
+}

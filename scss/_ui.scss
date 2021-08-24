@@ -1,0 +1,21 @@
+html,
+body {
+	overflow-x: hidden;
+}
+
+body {
+	position: relative;
+	min-width: 320px;
+	font-family: "GothamPro", sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 1.4;
+
+	@include media(md) {
+		font-size: 14px;
+	}
+}
+
+section {
+	position: relative;
+}
