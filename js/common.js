@@ -30,20 +30,23 @@ let catCounter = 1;
 let pageCounter = 0;
 let resultArray = [];
 
-window.onload = function () {
-	if ($(window).width() < 768) {
-		$('html, body').animate({
-			scrollTop: $(mainPageButton).offset().top
-		}, {
-			duration: 400,
-			easing: 'linear'
-		});
-	}
-};
-
 for (let i = 0; i < answers.length; i++) {
 	answers[i].dataset.num = i;
 }
+
+window.onload = function () {
+	if ($(window).width() < 768) {
+		$('html, body').animate(
+			{
+				scrollTop: $(mainPageButton).offset().top
+			},
+			{
+				duration: 400,
+				easing: 'linear'
+			}
+		);
+	}
+};
 
 function cssTrick() {
 	let viewheight = $(window).height();
@@ -233,12 +236,15 @@ function loadAnswers() {
 
 function scrollToButtonMobile() {
 	if ($(window).width() < 768) {
-		$('html, body').animate({
-			scrollTop: $(mainPageButton).offset().top
-		}, {
-			duration: 200,
-			easing: 'linear'
-		});
+		$('html, body').animate(
+			{
+				scrollTop: $(mainPageButton).offset().top
+			},
+			{
+				duration: 200,
+				easing: 'linear'
+			}
+		);
 	}
 }
 
@@ -291,8 +297,14 @@ mainPageButton.addEventListener('click', hideFirstPage);
 
 // расчитываем самый частый элемент для типа
 // eslint-disable-next-line max-len
-const maxOccurences = array => Array.from(array.reduce((map, value) => map.set(value, map.has(value) ? map.get(value) + 1 : 1),
-	new Map()).entries())
+const maxOccurences = array => Array.from(
+	array
+		.reduce(
+			(map, value) => map.set(value, map.has(value) ? map.get(value) + 1 : 1),
+			new Map()
+		)
+		.entries()
+)
 	.reduce((max, entry) => (entry[1] > max[1] ? entry : max))
 	.reduce((item, count) => ({ item, count }));
 
@@ -327,11 +339,16 @@ function loadResultPage() {
     	</picture>`
 	);
 
-	$(resultTitle)
-		.transit({ opacity: '1', rotateY: '360deg' }, 400)
-		.transit({
-			scale: 0, y: '-190px', opacity: '0', delay: 1500
-		}, 400, 'ease');
+	$(resultTitle).transit({ opacity: '1', rotateY: '360deg' }, 400).transit(
+		{
+			scale: 0,
+			y: '-190px',
+			opacity: '0',
+			delay: 1500
+		},
+		400,
+		'ease'
+	);
 
 	resultType.style.display = 'block';
 	$(resultType)
@@ -349,6 +366,32 @@ function loadResultPage() {
 	);
 }
 
+function hideOtherAnswersOnclick(n) {
+	for (let i = 0; i < answers.length; i++) {
+		if (i !== n) {
+			$(answers[i]).transit({ opacity: '0' }, 300);
+		}
+		// eslint-disable-next-line eqeqeq
+		if (i == n) {
+			$(answers[i]).prop('disabled', true);
+			$(answers[i]).css('background-color', '#FF9800');
+			$(answers[i]).css('opacity', '1');
+
+			setTimeout(() => {
+				$(answers[i]).prop('disabled', false);
+				$(answers[i]).css('background-color', '#FF6F32');
+				$(answers[i]).css('opacity', 'unset');
+			}, 1000);
+		}
+
+		if (pageCounter < questionsArray.length - 1) {
+			setTimeout(() => {
+				$(answers[i]).transit({ opacity: '1' }, 0);
+			}, 1300);
+		}
+	}
+}
+
 // Прячем другие ответы кроме выбранного, загрузка нового вопроса
 function loadNewQuestion(num) {
 	document.removeEventListener('click', answersAddListenerToAnswer);
@@ -356,30 +399,6 @@ function loadNewQuestion(num) {
 	setTimeout(() => {
 		answersContainer.style.overflow = 'auto';
 	}, 1000);
-
-	function hideOtherAnswersOnclick(n) {
-		for (let i = 0; i < answers.length; i++) {
-			if (i !== n) {
-				$(answers[i]).transit({ opacity: '0' }, 300);
-			} else {
-				$(answers[i]).prop('disabled', true);
-				$(answers[i]).css('background-color', '#FF9800');
-				$(answers[i]).css('opacity', '1');
-
-				setTimeout(() => {
-					$(answers[i]).prop('disabled', false);
-					$(answers[i]).css('background-color', '#FF6F32');
-					$(answers[i]).css('opacity', 'unset');
-				}, 1000);
-			}
-
-			if (pageCounter < questionsArray.length - 1) {
-				setTimeout(() => {
-					$(answers[i]).transit({ opacity: '1' }, 0);
-				}, 1300);
-			}
-		}
-	}
 
 	hideOtherAnswersOnclick(num);
 
@@ -529,8 +548,8 @@ answersContainer.addEventListener('scroll', function () {
 	}
 });
 
-checkboxLabel.addEventListener('focus', function() {
-	checkboxLabel.addEventListener('keydown', function() {
+checkboxLabel.addEventListener('focus', function () {
+	checkboxLabel.addEventListener('keydown', function () {
 		if ($(checkbox).is(':checked')) {
 			$(checkbox).prop('checked', false);
 		} else {
